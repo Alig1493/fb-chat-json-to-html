@@ -91,6 +91,7 @@ async def render_data(
             )
             for message in loaded_data.get("messages", []):
                 reactions = []
+                sender_name = message.get("senderName", "")
                 for reaction in message["reactions"]:
                     reaction_content = REACTION_CONTENT.format(
                         reaction=reaction["reaction"], actor=reaction["actor"]
@@ -102,7 +103,7 @@ async def render_data(
                     data_table_file.write(
                         BODY.format(
                             text=message.get("text", ""),
-                            sender_name=message.get("sender_name", ""),
+                            sender_name=sender_name,
                             timestamp=await epoch_to_datetime(message.get("timestamp")),
                             reaction_body="\n".join(reactions),
                         )
@@ -118,7 +119,7 @@ async def render_data(
                                 media_template.format(
                                     media_tag=media_tag,
                                     uri=content["uri"][2:],
-                                    sender_name=message.get("sender_name", ""),
+                                    sender_name=sender_name,
                                     timestamp=await epoch_to_datetime(
                                         message.get("timestamp")
                                     ),
