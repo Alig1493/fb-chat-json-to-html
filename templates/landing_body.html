@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Welcome to FB chat json to html converter</h1>
+    <form 
+        hx-post="/render" 
+        hx-target="#main-body" 
+        hx-swap="outerHTML" 
+        enctype="multipart/form-data">
+        <!-- <label for="file">Upload JSON File:</label>
+        <input type="file" id="file" name="file" accept=".json" required> -->
+        <div class="form-group">
+            <label for="jsonFile">FB Chat JSON File:</label>
+            <input type="file" 
+                   id="jsonFile" 
+                   name="json_file" 
+                   accept=".json,application/json"
+                   required>
+        </div>
+        <div class="form-group">
+            <label for="zipFile">Static Media ZIP File:</label>
+            <input type="file" 
+                   id="zipFile" 
+                   name="zip_file" 
+                   accept=".zip,application/zip"
+                   required>
+        </div>
+        <button type="submit">Render Data</button>
+    </form>
+{% endblock %}
